@@ -1,6 +1,6 @@
 import PageLayout from "components/PageLayout";
 
-export default function LoginRegister() {
+export default function Register() {
   return (
     <PageLayout>
       <div className="auth-page">
