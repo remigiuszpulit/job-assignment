@@ -10,7 +10,6 @@ export default function Navbar() {
   const logout = () => {
     dispatch({ type: "logout" });
     navigate("/logout");
-    console.log(user);
   };
 
   return (
