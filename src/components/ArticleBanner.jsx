@@ -1,8 +1,8 @@
-export default function ArticleBanner() {
+export default function ArticleBanner({ title, date, favoritesCount, author }) {
   return (
     <div className="banner">
       <div className="container">
-        <h1>How to build webapps that scale</h1>
+        <h1>{title}</h1>
 
         <div className="article-meta">
           <a href="/#/profile/ericsimmons">
@@ -10,18 +10,19 @@ export default function ArticleBanner() {
           </a>
           <div className="info">
             <a href="/#/profile/ericsimmons" className="author">
-              Eric Simons
+              {author.username}
             </a>
-            <span className="date">January 20th</span>
+            {/* january 20th */}
+            <span className="date">{date}</span>
           </div>
           <button className="btn btn-sm btn-outline-secondary">
             <i className="ion-plus-round" />
-            &nbsp; Follow Eric Simons <span className="counter">(10)</span>
+            &nbsp; {`Follow ${author.username}`} <span className="counter">(10)</span>
           </button>
           &nbsp;&nbsp;
           <button className="btn btn-sm btn-outline-primary">
             <i className="ion-heart" />
-            &nbsp; Favorite Post <span className="counter">(29)</span>
+            &nbsp; Favorite Post <span className="counter">({favoritesCount})</span>
           </button>
         </div>
       </div>

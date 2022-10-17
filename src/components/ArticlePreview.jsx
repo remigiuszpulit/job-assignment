@@ -1,25 +1,40 @@
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export default function ArticlePreview() {
+export default function ArticlePreview({ user, author, date, title, desc, favoritesCount, slug, favorite, favorited }) {
+  const navigate = useNavigate();
   return (
     <div className="article-preview">
       <div className="article-meta">
-        <Link to="/profile/ericsimmons">
+        <Link to={`/profile/${author}`}>
           <img src="http://i.imgur.com/Qr71crq.jpg" />
         </Link>
         <div className="info">
-          <Link to="/profile/ericsimmons" className="author">
-            Eric Simons
+          <Link to={`/profile/${author}`} className="author">
+            {author}
           </Link>
-          <span className="date">January 20th</span>
+          <span className="date">{date}</span>
         </div>
-        <button className="btn btn-outline-primary btn-sm pull-xs-right">
-          <i className="ion-heart" /> 29
-        </button>
+        {user !== undefined && (
+          <button
+            onClick={
+              user.username !== ""
+                ? favorited
+                  ? () => favorite(slug, true)
+                  : () => favorite(slug, false)
+                : () => navigate("/login")
+            }
+            className={`btn btn-outline-primary btn-sm pull-xs-right ${
+              user.username !== "" && favorited ? "active" : null
+            }`}
+          >
+            <i className="ion-heart" /> {favoritesCount}
+          </button>
+        )}
       </div>
-      <Link to="/how-to-build-webapps-that-scale" className="preview-link">
-        <h1>How to build webapps that scale</h1>
-        <p>This is the description for the post.</p>
+      <Link to={`/${slug}`} className="preview-link">
+        <h1>{title}</h1>
+        <p>{desc}</p>
         <span>Read more...</span>
       </Link>
     </div>

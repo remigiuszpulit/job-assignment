@@ -1,10 +1,16 @@
-export default function ArticleContent() {
+import showdown from "showdown";
+import * as DOMPurify from "dompurify";
+
+export default function ArticleContent({ desc, title, body }) {
+  const converter = new showdown.Converter();
+  const html = converter.makeHtml(body);
+  let cleanHtml = DOMPurify.sanitize(html);
   return (
     <div className="row article-content">
       <div className="col-md-12">
-        <p>Web development technologies have evolved at an incredible clip over the past few years.</p>
-        <h2 id="introducing-ionic">Introducing RealWorld.</h2>
-        <p>It&lsquo;s a great solution for learning how other frameworks work.</p>
+        <p>{desc}</p>
+        <h2 id="introducing-ionic">{title}</h2>
+        <p dangerouslySetInnerHTML={{ __html: cleanHtml }} />
       </div>
     </div>
   );
