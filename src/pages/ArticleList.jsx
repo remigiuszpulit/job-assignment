@@ -29,6 +29,7 @@ export default function ArticleList() {
                   key={article.title}
                   favorited={article.favorited}
                   author={article.author.username}
+                  authorImg={article.author.image}
                   title={article.title}
                   date={article.createdAt}
                   favoritesCount={article.favoritesCount}

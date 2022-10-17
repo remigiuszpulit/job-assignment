@@ -2,7 +2,6 @@ import React, { useReducer } from "react";
 import { AuthReducer } from "./reducer";
 
 const LoginStateContext = React.createContext();
-const LoginDispatchContext = React.createContext();
 
 export const initialState = {
   bio: "",
@@ -14,28 +13,26 @@ export const initialState = {
 
 export function useCurrentUser() {
   const context = React.useContext(LoginStateContext);
+  const user = context[0];
   if (context === undefined) {
     throw new Error("useAuthState must be used within a AuthProvider");
   }
 
-  return context;
+  return user;
 }
 
 export function useLoginDispatch() {
-  const context = React.useContext(LoginDispatchContext);
+  const context = React.useContext(LoginStateContext);
+  const dispatch = context[1];
   if (context === undefined) {
     throw new Error("useAuthDispatch must be used within a AuthProvider");
   }
 
-  return context;
+  return dispatch;
 }
 
 export const AuthProvider = ({ children }) => {
   const [user, dispatch] = useReducer(AuthReducer, initialState);
 
-  return (
-    <LoginStateContext.Provider value={user}>
-      <LoginDispatchContext.Provider value={dispatch}>{children}</LoginDispatchContext.Provider>
-    </LoginStateContext.Provider>
-  );
+  return <LoginStateContext.Provider value={[user, dispatch]}>{children}</LoginStateContext.Provider>;
 };

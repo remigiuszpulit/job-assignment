@@ -1,20 +1,25 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import ArticleAuthor from "./ArticleAuthor";
 
-export default function ArticlePreview({ user, author, date, title, desc, favoritesCount, slug, favorite, favorited }) {
+export default function ArticlePreview({
+  user,
+  author,
+  authorImg,
+  date,
+  title,
+  desc,
+  favoritesCount,
+  slug,
+  favorite,
+  favorited,
+}) {
   const navigate = useNavigate();
+
   return (
     <div className="article-preview">
       <div className="article-meta">
-        <Link to={`/profile/${author}`}>
-          <img src="http://i.imgur.com/Qr71crq.jpg" />
-        </Link>
-        <div className="info">
-          <Link to={`/profile/${author}`} className="author">
-            {author}
-          </Link>
-          <span className="date">{date}</span>
-        </div>
+        <ArticleAuthor author={author} date={date} img={authorImg} />
         {user !== undefined && (
           <button
             onClick={
