@@ -1,17 +1,17 @@
 import ArticlePreview from "components/ArticlePreview";
 import Banner from "components/Banner";
 import FeedToggle from "components/FeedToggle";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import PageLayout from "components/PageLayout";
 import TagsContainer from "components/TagsContainer";
-
-import useArticlesListFacade from "facades/useArticlesListFacade";
+import useApi from "api/useApi";
 
 export default function ArticleList() {
-  const [getArticles, favorite, articles, user] = useArticlesListFacade();
+  const [articles, setArticles] = useState([]);
+  const { getArticles } = useApi();
 
   useEffect(() => {
-    getArticles();
+    getArticles(setArticles);
   }, []);
 
   return (
@@ -25,7 +25,6 @@ export default function ArticleList() {
               <FeedToggle />
               {articles.map(article => (
                 <ArticlePreview
-                  user={user}
                   key={article.title}
                   favorited={article.favorited}
                   author={article.author.username}
@@ -35,7 +34,7 @@ export default function ArticleList() {
                   favoritesCount={article.favoritesCount}
                   desc={article.description}
                   slug={article.slug}
-                  favorite={favorite}
+                  updateList={() => getArticles(setArticles)}
                 />
               ))}
             </div>

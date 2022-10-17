@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import ArticleAuthor from "./ArticleAuthor";
+import FavoriteBtn from "./FavoriteBtn";
 
 export default function ArticlePreview({
-  user,
   author,
   authorImg,
   date,
@@ -11,31 +10,15 @@ export default function ArticlePreview({
   desc,
   favoritesCount,
   slug,
-  favorite,
-  favorited,
-}) {
-  const navigate = useNavigate();
 
+  favorited,
+  updateList,
+}) {
   return (
     <div className="article-preview">
       <div className="article-meta">
         <ArticleAuthor author={author} date={date} img={authorImg} />
-        {user !== undefined && (
-          <button
-            onClick={
-              user.username !== ""
-                ? favorited
-                  ? () => favorite(slug, true)
-                  : () => favorite(slug, false)
-                : () => navigate("/login")
-            }
-            className={`btn btn-outline-primary btn-sm pull-xs-right ${
-              user.username !== "" && favorited ? "active" : null
-            }`}
-          >
-            <i className="ion-heart" /> {favoritesCount}
-          </button>
-        )}
+        <FavoriteBtn item={slug} type={"articles"} isChecked={favorited} update={updateList} count={favoritesCount} />
       </div>
       <Link to={`/${slug}`} className="preview-link">
         <h1>{title}</h1>
