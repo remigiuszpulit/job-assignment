@@ -1,13 +1,10 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import instance from "api/instance";
-import { useLoginDispatch } from "context/context";
+import useApi from "api/useApi";
 
 export default function Login() {
   const [error, setError] = useState(false);
-  const dispatch = useLoginDispatch();
-  const navigate = useNavigate();
+  const { login } = useApi();
 
   const {
     register,
@@ -15,24 +12,7 @@ export default function Login() {
 
     formState: { errors },
   } = useForm();
-  const onSubmit = async data => {
-    try {
-      const res = await instance({
-        method: "post",
-        url: "/users/login",
-        data: {
-          user: {
-            ...data,
-          },
-        },
-      });
-      dispatch({ type: "login", payload: res.data.user });
-      setError(false);
-      navigate("/");
-    } catch (e) {
-      setError(true);
-    }
-  };
+
   return (
     <>
       <div className="auth-page">
@@ -47,7 +27,7 @@ export default function Login() {
                 {errors.password && <li>Please provide a password</li>}
               </ul>
 
-              <form onSubmit={handleSubmit(onSubmit)}>
+              <form onSubmit={handleSubmit(data => login(data, setError))}>
                 <fieldset className="form-group">
                   <input
                     {...register("email", {
@@ -69,7 +49,7 @@ export default function Login() {
                 </fieldset>
 
                 <button type="submit" className="btn btn-lg btn-primary pull-xs-right">
-                  Sign up
+                  Sign in
                 </button>
               </form>
             </div>

@@ -13,7 +13,7 @@ export default function FavoriteFollowBtn({ item, type, isChecked = false, updat
       } ${isChecked ? "active" : null}`}
     >
       <i className="ion-heart" />{" "}
-      {!noText && <span>&nbsp; {type === "profiles" ? `Follow ${item}` : "Favorite Post"}</span>}{" "}
+      {!noText && <span>&nbsp; {type === "profiles" ? `Follow ${item}` : "Favorite Post"}</span>}
       <span className="counter">{count}</span>
     </button>
   );
