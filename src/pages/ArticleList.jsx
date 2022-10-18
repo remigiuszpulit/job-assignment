@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import TagsContainer from "components/TagsContainer";
 import useApi from "api/useApi";
 
+// TODO: implement pagination
+
 export default function ArticleList() {
   const [articles, setArticles] = useState([]);
   const [tab, setTab] = useState("global");
