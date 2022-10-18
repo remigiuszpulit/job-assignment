@@ -1,17 +1,20 @@
-export default function FeedToggle() {
+export default function FeedToggle({ options, active, update }) {
   return (
     <div className="feed-toggle">
       <ul className="nav nav-pills outline-active">
-        <li className="nav-item">
-          <a className="nav-link disabled" href="">
-            Your Feed
-          </a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link active" href="">
-            Global Feed
-          </a>
-        </li>
+        {options.map(option => {
+          return (
+            <li key={option.value} className={`nav-item`}>
+              <button
+                onClick={() => !option.disabled && update(option.value)}
+                className={`nav-link ${active === option.value && "active"} ${option.disabled && "disabled"}`}
+                style={{ background: "none", border: "none" }}
+              >
+                {option.name}
+              </button>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

@@ -1,9 +1,14 @@
 import { useCurrentUser } from "context/context";
-import instance from "api/instance";
 import { useNavigate } from "react-router-dom";
 import { useLoginDispatch } from "context/context";
+import axios from "axios";
 
 export default function useApi() {
+  const instance = axios.create({
+    baseURL: "http://localhost:3000/api",
+    timeout: 1000,
+  });
+
   const navigate = useNavigate();
   const dispatch = useLoginDispatch();
 
@@ -26,6 +31,7 @@ export default function useApi() {
           },
         },
       });
+
       dispatch({ type: "login", payload: res.data.user });
       setError(false);
       navigate("/");
@@ -34,26 +40,30 @@ export default function useApi() {
     }
   };
 
-  const getArticles = async setState => {
+  const getArticles = async (setState, myFeed, author, favoritedBy) => {
     try {
       const res = await instance({
         method: "get",
         headers,
-        url: "/articles",
+        url: `/articles${myFeed === true ? "/feed" : "/"}`,
+        params: {
+          author,
+          favorited: favoritedBy,
+        },
       });
       setState(res.data.articles);
     } catch (e) {
       console.log(e);
     }
   };
-  const getArticle = async (setState, slug) => {
+  const getSingleItem = async (setState, endpoint, slug) => {
     try {
       const res = await instance({
         method: "get",
         headers,
-        url: `/articles/${slug}`,
+        url: `/${endpoint}/${slug}`,
       });
-      setState(res.data.article);
+      endpoint === "articles" ? setState(res.data.article) : setState(res.data.profile);
     } catch (e) {
       console.log(e);
     }
@@ -72,5 +82,5 @@ export default function useApi() {
     }
   };
 
-  return { favoriteFollow, getArticles, getArticle, login, user };
+  return { favoriteFollow, getArticles, getSingleItem, login, user };
 }

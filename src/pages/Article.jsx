@@ -8,11 +8,11 @@ import ArticleActions from "components/ArticleActions";
 
 export default function Article() {
   const [articleData, setArticleData] = useState(undefined);
-  const { getArticle } = useApi();
+  const { getSingleItem } = useApi();
   const slug = useParams().slug;
 
   useEffect(() => {
-    getArticle(setArticleData, slug);
+    getSingleItem(setArticleData, "articles", slug);
   }, []);
 
   return (
@@ -26,7 +26,7 @@ export default function Article() {
               slug={slug}
               favorited={articleData.favorited}
               favoritesCount={articleData.favoritesCount}
-              update={() => getArticle(setArticleData, slug)}
+              update={() => getSingleItem(setArticleData, "articles", slug)}
             />
           </ArticleBanner>
 
@@ -42,7 +42,7 @@ export default function Article() {
                   slug={slug}
                   favorited={articleData.favorited}
                   favoritesCount={articleData.favoritesCount}
-                  update={() => getArticle(setArticleData, slug)}
+                  update={() => getSingleItem(setArticleData, "articles", slug)}
                 />
               </div>
             </div>

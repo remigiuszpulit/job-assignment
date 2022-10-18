@@ -29,7 +29,7 @@ export default function Navbar() {
           {user.username === "" ? (
             <>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/login">
+                <NavLink className="nav-link" data-testid="loginButton" to="/login">
                   Sign in
                 </NavLink>
               </li>

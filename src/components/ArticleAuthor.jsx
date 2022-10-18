@@ -12,7 +12,7 @@ export default function ArticleAuthor({ author, date, img }) {
         <Link to={`/profile/${author}`} className="author">
           {author}
         </Link>
-        <span className="date">{moment(date).format("MMMM Do")}</span>
+        <span className="date">{moment(date).format("MMMM Do YYYY")}</span>
       </div>
     </>
   );

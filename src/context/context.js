@@ -13,7 +13,7 @@ export const initialState = {
 
 export function useCurrentUser() {
   const context = React.useContext(LoginStateContext);
-  const user = context[0];
+  const { user } = context;
   if (context === undefined) {
     throw new Error("useAuthState must be used within a AuthProvider");
   }
@@ -23,7 +23,7 @@ export function useCurrentUser() {
 
 export function useLoginDispatch() {
   const context = React.useContext(LoginStateContext);
-  const dispatch = context[1];
+  const { dispatch } = context;
   if (context === undefined) {
     throw new Error("useAuthDispatch must be used within a AuthProvider");
   }
@@ -34,5 +34,5 @@ export function useLoginDispatch() {
 export const AuthProvider = ({ children }) => {
   const [user, dispatch] = useReducer(AuthReducer, initialState);
 
-  return <LoginStateContext.Provider value={[user, dispatch]}>{children}</LoginStateContext.Provider>;
+  return <LoginStateContext.Provider value={{ user, dispatch }}>{children}</LoginStateContext.Provider>;
 };
