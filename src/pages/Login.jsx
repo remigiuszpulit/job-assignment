@@ -1,4 +1,3 @@
-import PageLayout from "components/PageLayout";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -35,7 +34,7 @@ export default function Login() {
     }
   };
   return (
-    <PageLayout>
+    <>
       <div className="auth-page">
         <div className="container page">
           <div className="row">
@@ -77,6 +76,6 @@ export default function Login() {
           </div>
         </div>
       </div>
-    </PageLayout>
+    </>
   );
 }

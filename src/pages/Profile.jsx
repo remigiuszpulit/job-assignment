@@ -1,11 +1,10 @@
 import ArticlePreview from "components/ArticlePreview";
 import FeedToggle from "components/FeedToggle";
-import PageLayout from "components/PageLayout";
 import ProfileBanner from "components/ProfileBanner";
 
 export default function Profile() {
   return (
-    <PageLayout>
+    <>
       <div className="profile-page">
         <ProfileBanner />
         {/* my articles & favorited articles */}
@@ -18,6 +17,6 @@ export default function Profile() {
           </div>
         </div>
       </div>
-    </PageLayout>
+    </>
   );
 }

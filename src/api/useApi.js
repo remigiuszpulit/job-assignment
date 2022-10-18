@@ -25,6 +25,18 @@ export default function useApi() {
       console.log(e);
     }
   };
+  const getArticle = async (setState, slug) => {
+    try {
+      const res = await instance({
+        method: "get",
+        headers,
+        url: `/articles/${slug}`,
+      });
+      setState(res.data.article);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   const favoriteFollow = async (item, type, remove) => {
     try {
       user.username === ""
@@ -38,5 +50,6 @@ export default function useApi() {
       console.log(e);
     }
   };
-  return { favoriteFollow, getArticles, user };
+
+  return { favoriteFollow, getArticles, getArticle, user };
 }

@@ -2,7 +2,6 @@ import ArticlePreview from "components/ArticlePreview";
 import Banner from "components/Banner";
 import FeedToggle from "components/FeedToggle";
 import { useEffect, useState } from "react";
-import PageLayout from "components/PageLayout";
 import TagsContainer from "components/TagsContainer";
 import useApi from "api/useApi";
 
@@ -15,7 +14,7 @@ export default function ArticleList() {
   }, []);
 
   return (
-    <PageLayout>
+    <>
       <div className="home-page">
         <Banner />
 
@@ -45,6 +44,6 @@ export default function ArticleList() {
           </div>
         </div>
       </div>
-    </PageLayout>
+    </>
   );
 }

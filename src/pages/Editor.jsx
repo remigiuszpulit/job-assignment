@@ -1,8 +1,6 @@
-import PageLayout from "components/PageLayout";
-
 export default function Editor() {
   return (
-    <PageLayout>
+    <>
       <div className="editor-page">
         <div className="container page">
           <div className="row">
@@ -31,6 +29,6 @@ export default function Editor() {
           </div>
         </div>
       </div>
-    </PageLayout>
+    </>
   );
 }

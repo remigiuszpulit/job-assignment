@@ -1,8 +1,6 @@
-import PageLayout from "components/PageLayout";
-
 export default function Register() {
   return (
-    <PageLayout>
+    <>
       <div className="auth-page">
         <div className="container page">
           <div className="row">
@@ -32,6 +30,6 @@ export default function Register() {
           </div>
         </div>
       </div>
-    </PageLayout>
+    </>
   );
 }

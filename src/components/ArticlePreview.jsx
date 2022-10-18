@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import ArticleAuthor from "./ArticleAuthor";
-import FavoriteBtn from "./FavoriteBtn";
+import FavoriteFollowBtn from "./FavoriteFollowBtn";
 
 export default function ArticlePreview({
   author,
@@ -10,7 +10,6 @@ export default function ArticlePreview({
   desc,
   favoritesCount,
   slug,
-
   favorited,
   updateList,
 }) {
@@ -18,7 +17,14 @@ export default function ArticlePreview({
     <div className="article-preview">
       <div className="article-meta">
         <ArticleAuthor author={author} date={date} img={authorImg} />
-        <FavoriteBtn item={slug} type={"articles"} isChecked={favorited} update={updateList} count={favoritesCount} />
+        <FavoriteFollowBtn
+          item={slug}
+          type={"articles"}
+          isChecked={favorited}
+          update={updateList}
+          count={favoritesCount}
+          noText
+        />
       </div>
       <Link to={`/${slug}`} className="preview-link">
         <h1>{title}</h1>

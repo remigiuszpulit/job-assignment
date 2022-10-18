@@ -1,8 +1,6 @@
-import PageLayout from "components/PageLayout";
-
 export default function Settings() {
   return (
-    <PageLayout>
+    <>
       <div className="settings-page">
         <div className="container page">
           <div className="row">
@@ -37,6 +35,6 @@ export default function Settings() {
           </div>
         </div>
       </div>
-    </PageLayout>
+    </>
   );
 }
